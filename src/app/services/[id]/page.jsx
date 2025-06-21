@@ -1,7 +1,8 @@
-import Link from 'next/link';
 import React from 'react';
 
-const page = () => {
+const page = ({ params }) => {
+  const id = params?.id;
+
   const services = [
     {
       id: '64e9a1f9b74f9c1d23ab1234',
@@ -90,29 +91,21 @@ const page = () => {
     },
   ];
 
+  const data = services.find((d) => d.id === id);
+
+  if (!data) {
+    return <div>Not founD 404</div>;
+  }
   return (
-    <div>
-      <h1 className="text-center text-6xl mb-6 capitalize">our services</h1>
-      <div className="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-        {services.map((ser) => (
-          <Link
-            href={`/services/${ser.id}`}
-            key={ser.id}
-            className="border w-[350px] rounded-2xl flex flex-col justify-between overflow-hidden group"
-          >
-            <img
-              className="h-[200px] w-full object-cover group-hover:scale-[1.1] transition-transform duration-300 ease-in-out transform"
-              src={ser.image}
-              alt={ser.name}
-            />
-            <div className="p-4 z-20 bg-black flex flex-col gap-2">
-              <h1 className="text-2xl">{ser.name}</h1>
-              <p>${ser.price}</p>
-              <p className="opacity-70">{ser.description}</p>
-            </div>
-          </Link>
-        ))}
-      </div>
+    <div className="flex flex-col gap-8 justify-center min-h-screen">
+      <h1 className="text-4xl">{data.name}</h1>
+      <img
+        src={data.image}
+        className="w-full max-h-[40vh] object-cover"
+        alt={data.name}
+      />
+      <p className="text-xl">${data.price}</p>
+      <p>{data.description}</p>
     </div>
   );
 };

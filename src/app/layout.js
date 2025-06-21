@@ -24,8 +24,8 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar />
-        <main className='min-h-[90vh] py-3 flex items-center justify-center'>{children}</main>
+          <Navbar />
+        <main className='min-h-[90vh] flex items-center justify-center'>{children}</main>
         <Footer />
       </body>
     </html>
